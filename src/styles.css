@@ -1,0 +1,130 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-hairline: var(--hairline);
+  --color-gold: var(--gold);
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Core palette (oklch equivalents of #0A0A0A → #FFFFFF) */
+  --background: oklch(0.13 0 0);          /* #0A0A0A */
+  --foreground: oklch(1 0 0);
+  --surface: oklch(0.18 0 0);             /* #1C1C1E */
+  --surface-elevated: oklch(0.22 0 0);    /* #2C2C2E */
+  --hairline: oklch(0.34 0 0);            /* #48484A */
+
+  --card: oklch(0.22 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(1 0 0);
+
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.28 0 0);
+  --input: oklch(0.22 0 0);
+  --ring: oklch(0.9 0 0);
+  --gold: oklch(0.82 0.13 85);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, oklch(0.18 0 0), oklch(0.22 0 0));
+  --gradient-card: linear-gradient(160deg, oklch(0.22 0 0), oklch(0.26 0 0));
+  --gradient-accent: linear-gradient(135deg, oklch(0.34 0 0), oklch(0.45 0 0));
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.28 0 0) 0%, oklch(0.13 0 0) 70%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.13 85), oklch(0.7 0.16 55));
+  --gradient-overlay: radial-gradient(circle at 50% 0%, transparent 0%, oklch(0.13 0 0 / 0.6) 100%);
+
+  /* Shadows */
+  --shadow-card: 0 8px 24px -8px oklch(0 0 0 / 0.6), 0 2px 4px oklch(0 0 0 / 0.4);
+  --shadow-glow: 0 0 40px -10px oklch(1 0 0 / 0.15);
+}
+
+.dark {
+  /* App is dark by default — keep tokens identical */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(circle at 20% -10%, oklch(0.3 0 0 / 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, oklch(0.28 0 0 / 0.3) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-card { background-image: var(--gradient-card); }
+  .bg-gradient-accent { background-image: var(--gradient-accent); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .font-serif-italic { font-family: var(--font-serif); font-style: italic; }
+  .text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hairline-border { border: 1px solid var(--hairline); }
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, oklch(1 0 0 / 0.015) 2px, oklch(1 0 0 / 0.015) 3px);
+    pointer-events: none;
+  }
+}
